@@ -1,4 +1,4 @@
-package zst.javafx.tutorial;
+package zst.prac.tutorial;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
