@@ -15,13 +15,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import java.nio.IntBuffer;
 
+/**
+ * 初回のプログラム起動確認とサンプル画面を起動してみる
+ * 
+ * @author takunoji
+ * @see https://www.lwjgl.org/guide
+ */
 public class TestSetUp {
 	// The window handle
 	private long window;
 
 	/**
+	 * 初期化処理<BR>
+	 * ※間はよくわからなかったので　TODOコメントをつけております。
 	 * エラー時のコールバックのデフォルト設定<BR>
-	 * 
+	 * GLFWの終了処理の設定と自由呼び出しのコールバック関数指定
 	 */
 	public void run() {
 		System.out.println("LWJGJL Version = " + Version.getVersion());
@@ -60,7 +68,12 @@ public class TestSetUp {
 		glfwDefaultWindowHints(); // optional, the current window hints are already the default
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // ウィンドウ作成後に表示にする
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // ウィンドウをリサイズ可能にする
-		// ウィンドウ作成
+		// ウィンドウ作成(NULL=>MemoryUtil.NULL(long型))
+		window = glfwCreateWindow(300, 300, "Hello World", NULL, NULL);
+		if ( window == NULL) {
+			throw new RuntimeException("GLFWウィンドウの作成に失敗しました。");
+		}
+		// ウィンドウのコールバック関数などを指定する
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) ->{
 			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 				glfwSetWindowShouldClose(window, true);
